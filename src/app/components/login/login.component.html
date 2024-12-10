@@ -1,0 +1,111 @@
+<div class="md:flex bg-gray-800 text-white h-screen">
+    <!-- Left Pane -->
+    <div class="flex-1 bg-gray-500 text-white flex flex-col justify-center items-center p-12">
+        <h1 class="text-4xl font-bold mb-4">See what's happening now</h1>
+        <p class="text-lg mb-8">Join Twitter today</p>
+        <img src="assets/loginImage.svg" alt="Hashtag illustration" class="max-w-md" />
+        <p class="text-sm mt-12">&copy; 2024 Twitter, Inc.</p>
+    </div>
+
+
+    <!-- Right Pane -->
+    <div class="flex-1  flex flex-col justify-center items-center px-12">
+        <!-- Login Section -->
+        @if(!isSignIn){<div class="w-full max-w-sm">
+            <h2 class="text-3xl font-bold mb-6">Find out what's trending</h2>
+            <form class="space-y-4" [formGroup]="loginForm" (ngSubmit)="login()">
+                <input type="text" placeholder="Username" formControlName="username"
+                    class="w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-blue-300 bg-gray-500" />
+                @if(loginForm.get('username')?.invalid && loginForm.get('username')?.touched){
+                <div class="text-red-500">
+                    @if(loginForm.get('username')?.errors?.['required']){<small>Username is required.</small>}
+                    @if(loginForm.get('username')?.errors?.['minlength']){<small>
+                        Username must be at least 3 characters long.
+                    </small>}
+                </div>
+                }
+                <input type="password" placeholder="Enter your password" formControlName="password"
+                    class="w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-blue-300 bg-gray-500" />
+                @if(loginForm.get('password')?.invalid && loginForm.get('usernpasswordame')?.touched){
+                <div>
+                    @if(loginForm.get('password')?.errors?.['required']){<small>Username is required.</small>}
+                    @if(loginForm.get('password')?.errors?.['minlength']){<small>
+                        Password must be at least 3 characters long.
+                    </small>}
+                </div>
+                }
+                <div class="text-right">
+                    <a class="text-white text-sm">Forgot your password?</a>
+                </div>
+                <button type="submit"
+                    class="w-full bg-blue-500 text-white py-3 rounded-full font-bold hover:bg-blue-600">
+                    Connect now
+                </button>
+                <div class="text-center mb-6">
+                    <span class="text-gray-600">Don't have an account? </span>
+                    <a class="text-blue-500 font-bold cursor-pointer" (click)="toggleSignIn()">Sign up</a>
+                </div>
+            </form>
+        </div>}
+
+
+        <!-- Sign In Section -->
+        @if(isSignIn){<div class="w-full max-w-sm">
+            <h2 class="text-3xl font-bold mb-6">Get Started With Twitter!</h2>
+            <form class="space-y-4" [formGroup]="signInForm" (ngSubmit)="signIn()">
+                <input type="text" placeholder="Name" formControlName="name"
+                    class="w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-blue-300 bg-gray-500" />
+                @if(signInForm.get('name')?.invalid && signInForm.get('name')?.touched){<div class="text-red-500">
+                    <small>Name is required.</small>
+                </div>}
+            
+                <select formControlName="gender"
+                    class="w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-blue-300 bg-gray-500">
+                    <option value="" disabled selected>Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+                @if(signInForm.get('gender')?.invalid && signInForm.get('gender')?.touched){<div class="text-red-500">
+                    <small>Gender is required.</small>
+                </div>}
+            
+                <input type="email" placeholder="Email" formControlName="email"
+                    class="w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-blue-300 bg-gray-500" />
+                    @if(signInForm.get('email')?.invalid && signInForm.get('email')?.touched){<div class="text-red-500">
+                        @if(signInForm.get('email')?.errors?.['required']){<small>Email is required.</small>}
+                        @if(signInForm.get('email')?.errors?.['email']){<small>Enter a valid email address.</small>}
+                </div>}
+            
+                <input type="file" placeholder="Profile Picture" formControlName="picture"
+                    class="w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-blue-300 bg-gray-500" />
+                    <!-- @if(signInForm.get('picture')?.invalid && signInForm.get('picture')?.touched){<div class="text-red-500">
+                    <small>Profile Picture URL is required.</small>
+                </div>} -->
+            
+                <input type="text" placeholder="Username" formControlName="username"
+                    class="w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-blue-300 bg-gray-500" />
+                    @if(signInForm.get('username')?.invalid && signInForm.get('username')?.touched){<div class="text-red-500">
+                    <small>Username is required.</small>
+                </div>}
+            
+                <input type="password" placeholder="Password" formControlName="password"
+                    class="w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-blue-300 bg-gray-500" />
+                    @if(signInForm.get('password')?.invalid && signInForm.get('password')?.touched){<div class="text-red-500">
+                    @if(signInForm.get('password')?.errors?.['required']){<small >Password is required.</small>}
+                    @if(signInForm.get('password')?.errors?.['minlength']){<small>Password must be at least 3 characters long.</small>}
+                </div>}
+            
+                <button type="submit"
+                    class="w-full bg-blue-500 text-white py-3 rounded-full font-bold hover:bg-blue-600">
+                    Get Started
+                </button>
+                <div class="text-center mb-6">
+                    <span class="text-gray-500">Have an account? </span>
+                    <a class="text-blue-500 font-bold cursor-pointer" (click)="toggleSignIn()">Log In</a>
+                </div>
+            </form>
+            
+        </div>}
+    </div>
+</div>

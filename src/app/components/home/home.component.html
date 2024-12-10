@@ -1,0 +1,11 @@
+<div class="h-screen bg-black text-white overflow-y-hidden">
+    <div class="container h-full mx-auto xl:px-30 max-w-6xl">
+        <div class="grid grid-cols-5 h-full">
+            <app-sidenav></app-sidenav>
+            <div class="col-span-4 lg:col-span-3 border-x-[1px] border-neutral-800">
+                <router-outlet/>  
+            </div>
+            <app-follow-bar></app-follow-bar>
+        </div>
+    </div>
+</div>
