@@ -28,13 +28,7 @@
       @for(post of posts(); track post){<div class="bg-gray-900 rounded-lg p-4 space-y-4">
         <div class="flex space-x-4 items-center">
           <!-- Profile Picture -->
-          <!-- <img src={{post.picture}} alt="profile"  /> -->
           <img [src]="post.picture || 'assets/user.png'" alt="{{post.name}}" class="w-12 h-12 rounded-full" />
-          <!-- <img 
-          [src]="user.picture || 'assets/default.png'" 
-          alt="{{ user.name }}" 
-          class="object-cover rounded-full w-12 h-12" 
-        /> -->
           <!-- User Info -->
           <div>
             <p class="font-semibold">{{ post.username }}</p>
@@ -45,10 +39,6 @@
         <p>{{ post.content }}</p>
         <!-- Actions -->
         <div class="flex space-x-6 text-gray-400">
-          <!-- <div class="flex items-center space-x-1">
-              <mat-icon class="text-gray-400">chat_bubble_outline</mat-icon>
-              <span>{{ post.comments }}</span>
-            </div> -->
           <div class="flex items-center space-x-1">
             <mat-icon class="text-gray-400">favorite_border</mat-icon>
             <span>{{ post.likes }}</span>

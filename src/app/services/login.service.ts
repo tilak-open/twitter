@@ -18,11 +18,14 @@ export class LoginService {
   private currentUsername = signal<string | null>(null);
 
   // Read-only signals for external use
-  isLoggedIn = this.isLoggedInSignal.asReadonly();
-  username = this.currentUsername.asReadonly();
+  storedUsername = localStorage.getItem('username');
+  isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
   constructor() {
-    // Fetch users when the service is initialized
+    if (this.isLoggedIn && this.storedUsername) {
+      this.isLoggedInSignal.set(true);
+      this.currentUsername.set(this.storedUsername);
+    }
     effect(() => {
       this.loadUsers();
     });
@@ -69,8 +72,6 @@ export class LoginService {
       return false;
     }
   }
-  
-  
 
   // Set login state
   private setLoggedIn(username: string): void {
@@ -84,7 +85,6 @@ export class LoginService {
     const username = this.currentUsername();
     return this.users().find(user => user.username === username);
   }
-  
 
   // Logout method
   logout(): void {
@@ -93,7 +93,6 @@ export class LoginService {
     this.isLoggedInSignal.set(false);
     this.currentUsername.set(null);
     this.snackBar.open('You are logged out!', 'Close', { duration: 2000 });
-
   }
 
 }

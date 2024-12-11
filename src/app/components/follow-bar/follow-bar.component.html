@@ -6,11 +6,8 @@
       @for(user of users(); track user){<div class="flex flex-row gap-4 items-center">
         <!-- Avatar -->
         <div class="rounded-full hover:opacity-90 transition cursor-pointer">
-          <img 
-            [src]="user.picture || 'assets/user.png'" 
-            alt="{{ user.name }}" 
-            class="object-cover rounded-full w-12 h-12" 
-          />
+          <img [src]="user.picture || 'assets/user.png'" alt="{{ user.name }}"
+            class="object-cover rounded-full w-12 h-12" />
         </div>
         <!-- User Details -->
         <div class="flex flex-col flex-1">
@@ -18,12 +15,10 @@
           <p class="text-neutral-400 text-sm">{{ user.username }}</p>
         </div>
         <!-- Follow/Unfollow Button -->
-        <button 
-          (click)="toggleFollow(user.id)" 
-          ngClass="{'bg-blue-500': !isFollowing(user.id), 'bg-gray-500': isFollowing(user.id)}"
+        <button mat-raised-button color="accent" (click)="toggleFollow(user.username)"
           class="text-white px-4 py-1 rounded-lg transition hover:opacity-80 w-24"
-        >
-          {{ isFollowing(user.id) ? 'Unfollow' : 'Follow' }}
+          [ngClass]="{'bg-blue-500': !followedUsers(), 'bg-gray-500': followedUsers()}">
+          {{ followService.followedUsers().has(user.username) ? 'Unfollow' : 'Follow' }}
         </button>
       </div>}
     </div>
