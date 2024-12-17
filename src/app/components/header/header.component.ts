@@ -25,10 +25,13 @@ export class HeaderComponent {
   loginService = inject(LoginService);
   snackBar = inject(MatSnackBar);
   http = inject(HttpClient);
+  userProfilePic: string | undefined; // Property to hold the user's profile picture
+
 
   constructor() {
     effect(() => {
       this.fetchFollowedUserPosts();
+      this.setUserProfilePic();
     });
   }
 
@@ -51,6 +54,12 @@ export class HeaderComponent {
       },
     });
   }
+
+  private setUserProfilePic() {
+    const currentUser  = this.loginService.getCurrentUserDetails();
+    this.userProfilePic = currentUser ?.picture || 'assets/user.png'; // Fallback to default image
+  }
+
   // Add a new tweet
   addPost() {
     if (this.tweetControl.invalid) {
