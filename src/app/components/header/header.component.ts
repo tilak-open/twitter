@@ -86,27 +86,22 @@ export class HeaderComponent {
 
   likePost(post: any) {
     const currentUser = this.loginService.getCurrentUserDetails();
-  
     // Check if the user has already liked this post
     if (currentUser?.likedPosts?.includes(post.id)) {
       this.snackBar.open('You have already liked this post!', 'Close', { duration: 2000 });
       return;
     }
-  
     // Update likes in the post
     const updatedPost = { ...post, likes: post.likes + 1 };
-  
     // Send the updated post to the server
     this.http.put(`http://localhost:3000/posts/${post.id}`, updatedPost).subscribe({
       next: () => {
         // Add post ID to user's likedPosts array
         this.loginService.updateLikedPosts(post.id);
-  
         // Update the local signal
         this.posts.update((currentPosts) =>
           currentPosts.map((p) => (p.id === post.id ? updatedPost : p))
         );
-  
         this.snackBar.open('Post liked!', 'Close', { duration: 2000 });
       },
       error: (err) => {
