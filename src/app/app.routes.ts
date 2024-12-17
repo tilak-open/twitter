@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NotificationComponent } from './components/notification/notification.component'; // Import the NotificationComponent
 import { AuthGuard } from './guards/auth.guard';
 import { HeaderComponent } from './components/header/header.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard],
@@ -20,6 +21,10 @@ export const routes: Routes = [
         {
           path: 'notification',
           component: NotificationComponent, // another child route component that the router renders
+        },
+        {
+          path: 'profile',
+          component: ProfileComponent, // another child route component that the router renders
         },
       ],
      },

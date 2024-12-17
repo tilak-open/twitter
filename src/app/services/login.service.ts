@@ -95,4 +95,27 @@ export class LoginService {
     this.snackBar.open('You are logged out!', 'Close', { duration: 2000 });
   }
 
+  async updateLikedPosts(postId: string): Promise<void> {
+    const currentUser = this.getCurrentUserDetails();
+  
+    if (currentUser) {
+      const updatedUser = {
+        ...currentUser,
+        likedPosts: [...(currentUser.likedPosts || []), postId],
+      };
+  
+      try {
+        // Update the user on the server
+        await this.http.put(`${this.apiUrl}/${currentUser.id}`, updatedUser).toPromise();
+  
+        // Update the local signal
+        this.users.update((users) =>
+          users.map((user) => (user.id === currentUser.id ? updatedUser : user))
+        );
+      } catch (error) {
+        console.error('Error updating liked posts:', error);
+      }
+    }
+  }
+  
 }

@@ -67,7 +67,6 @@ export class LoginComponent {
       this.snackBar.open('Please fill out the form correctly.', 'Close', { duration: 3000 });
       return;
     }
-        // const formData = this.loginForm.value; // Retrieve form values
 
     const formData: User = this.signInForm.value;
     const fileInput: HTMLInputElement | null = document.querySelector('input[formControlName="picture"]');

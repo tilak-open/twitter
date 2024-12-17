@@ -6,5 +6,6 @@ export interface User {
   email: string;
   username: string;
   password: string;
+  likedPosts?: string[];
   picture: string | null;
 }
