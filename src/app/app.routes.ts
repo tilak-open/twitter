@@ -5,31 +5,36 @@ import { NotificationComponent } from './components/notification/notification.co
 import { AuthGuard } from './guards/auth.guard';
 import { HeaderComponent } from './components/header/header.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { FollowComponent } from './components/follow/follow.component';
 
 export const routes: Routes = [
-    { path: 'home', component: HomeComponent, canActivate: [AuthGuard],
-      children: [
-        {
-          path: '',
-          redirectTo: 'header', 
-          pathMatch: 'full'
-        },
-        {
-          path: 'header', // child route path
-          component: HeaderComponent, // child route component that the router renders
-        },
-        {
-          path: 'notification',
-          component: NotificationComponent, // another child route component that the router renders
-        },
-        {
-          path: 'profile',
-          component: ProfileComponent, // another child route component that the router renders
-        },
-      ],
-     },
-    { path: 'login', component: LoginComponent},
-    // { path: 'notification', component: NotificationComponent, canActivate: [AuthGuard] },
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
-    { path: '**', redirectTo: 'login', pathMatch: 'full' },
+  {
+    path: 'home', component: HomeComponent, canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: 'header',
+        pathMatch: 'full'
+      },
+      {
+        path: 'header',
+        component: HeaderComponent,
+      },
+      {
+        path: 'follow',
+        component: FollowComponent,
+      },
+      {
+        path: 'notification',
+        component: NotificationComponent,
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+      },
+    ],
+  },
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
